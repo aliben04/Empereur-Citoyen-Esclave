@@ -88,9 +88,9 @@
     </header>
     <hr class="w-[90%] mx-auto border-gray-200">
 
-    <main class="grid grid-cols-3 items-start gap-3 my-10 p-5">
-        <section class="grid grid-cols-3 col-span-2 mx-5 gap-4">
-            <article class="col-span-3 flex justify-between ">
+    <main class="grid grid-cols-1 md:grid-cols-3 items-start gap-3 my-10 p-5">
+        <section class="grid grid-cols-1 md:grid-cols-3  col-span-2 mx-5 gap-4">
+            <article class="md:col-span-3 flex justify-between ">
                 <h1 class="text-[30px] font-bold">Mes Profils</h1>
                 <button class="btn-primary bg-blue-600">+ Ajouter un profile</button>
             </article>
@@ -128,21 +128,15 @@
                     type="text"
                     name="pseudo"
                     placeholder="Entrez votre pseudo..."
+                    id="ps"
                     class="w-full max-w-sm px-4 py-3 rounded-xl border border-gray-300 bg-black text-white placeholder-gray-400 outline-none transition-all duration-200 focus:border-amber-400 focus:ring-4 focus:ring-amber-100 shadow-sm"
                 />
                 <span class="ereur"></span>
-                <label for="avatar" class="mb-2 block text-sm font-semibold">
+                <label class="mb-2 block text-sm font-semibold">
                     Choisis ton avatar <span class="text-red-500">*</span>
                 </label>
-                <div class="flex flex-wrap gap-4 justify-center">
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">👑</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">⚔️</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">🛡️</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">🦊</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">🐺</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">🐉</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">🦁</p>
-                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">👻</p>
+                <div class="avatar flex flex-wrap gap-4 justify-center">
+                    <!--Avatars-->
                 </div>
                 <div>
                     <button class="btn-primary bg-blue-200">Annuler</button>

@@ -344,6 +344,9 @@
   .rotate-9 {
     rotate: 9deg;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .resize {
     resize: both;
   }
@@ -453,6 +456,9 @@
   }
   .border-gray-300 {
     border-color: var(--color-gray-300);
+  }
+  .border-red-500 {
+    border-color: var(--color-red-500);
   }
   .border-white {
     border-color: var(--color-white);
@@ -686,6 +692,12 @@
     outline-style: none;
   }
   @media (hover: hover) {
+    .hover\:border-green-500:hover {
+      border-color: var(--color-green-500);
+    }
+    .hover\:border-red-500:hover {
+      border-color: var(--color-red-500);
+    }
     .hover\:bg-amber-200:hover {
       background-color: var(--color-amber-200);
     }
@@ -696,8 +708,21 @@
       color: var(--color-amber-600);
     }
   }
+  .focus\:border:focus {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
   .focus\:border-amber-400:focus {
     border-color: var(--color-amber-400);
+  }
+  .focus\:border-green-500:focus {
+    border-color: var(--color-green-500);
+  }
+  .focus\:border-red-500:focus {
+    border-color: var(--color-red-500);
+  }
+  .focus\:bg-green-500:focus {
+    background-color: var(--color-green-500);
   }
   .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
@@ -718,6 +743,9 @@
   @media (width >= 48rem) {
     .md\:col-span-2 {
       grid-column: span 2 / span 2;
+    }
+    .md\:col-span-3 {
+      grid-column: span 3 / span 3;
     }
     .md\:mx-auto {
       margin-inline: auto;
