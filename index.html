@@ -6,24 +6,134 @@
     <title>Document</title>
     <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        .btn-primary {
+            height: 3rem;
+            border-radius: 0.75rem;
+            --tw-bg-opacity: 1;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            font-weight: 700;
+            --tw-text-opacity: 1;
+            }
+        nav li{
+            position: relative;
+        }
+        nav li::after{
+            content: "";
+            width: 0;
+            height: 2px;
+            background-color: black;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        nav li:hover::after{
+            width: 100%;
+        }
+
+    </style>
 </head>
-<body>
-    <header class="flex justify-between w-[90%] items-center mx-auto my-3">
-        <div class="flex p-5 mr-5">
-            <i class="text-amber-400 fa-solid fa-crown text-3xl mr-5"></i>
-            <h1 class="font-bold text-3xl"><span class="text-red-400">E</span>mpereur, <span class="text-blue-400">C</span>troyen, <span class="text-amber-400">E</span>sclave</h1>
-        </div>
-        <nav class="flex p-5 mr-5">
-            <ul class=" flex gap-2 ">
-                <li class="mx-5 text-[19px]"><a href="#">Accueil</a></li>
-                <li class="mx-5 text-[19px]"><a href="#">Profils</a></li>
-                <li class="mx-5 text-[19px]"><a href="#">Historique</a></li>
-            </ul>
-            <i class="text-[20px] mx-5 fa-regular fa-moon"></i>
-        </nav>
-        
-    </header>
-    <hr>
+<body class="text-amber-50 bg-black">
+    
+<header class="w-[95%] md:w-[90%] mx-auto my-4 flex flex-col md:flex-row items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+        <i class="fa-solid fa-crown text-3xl text-amber-500"></i>
+
+        <h1 class="font-bold text-2xl md:text-3xl">
+            <span class="text-red-400">E</span>mpereur,
+            <span class="text-blue-400">C</span>troyen,
+            <span class="text-amber-400">E</span>sclave
+        </h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex items-center gap-4 md:gap-6 rounded-full bg-amber-100 text-black px-5 py-3 ">
+
+        <ul class="flex items-center gap-4 md:gap-6">
+            <li>
+                <a href="#"
+                   class="font-medium  transition-colors">
+                    Accueil
+                </a>
+            </li>
+
+            <li>
+                <a href="#"
+                   class="font-medium  transition-colors">
+                    Profils
+                </a>
+            </li>
+
+            <li>
+                <a href="#"
+                   class="font-medium  transition-colors">
+                    Historique
+                </a>
+            </li>
+        </ul>
+
+        <!-- Dark mode -->
+        <button type="button"
+                class="border-l border-amber-300 pl-4 text-xl  transition-colors"
+                aria-label="Changer le thème">
+            <i class="fa-regular fa-moon"></i>
+        </button>
+
+    </nav>
+
+</header>
+
+<hr class="w-[90%] mx-auto border-gray-200">
+
+    <section class="grid grid-cols-1 md:grid-cols-2 text-amber-50 md:w-[90%] md:mx-auto md:h-150 items-center ">
+        <article class="p-3  flex flex-col gap-8 items-center md:items-start">
+            <h1 class="font-bold text-[35px] ">Le jeu de duel des <br> 3 cartes</h1>
+            <p class="text-gray-200" >Affronte l'ordinateur, gagne des points et grimpe dans le classement</p>
+            <div class="flex gap-3">
+                <button class="btn-primary bg-amber-200 text-black hover:bg-amber-500"><a href="#"><i class="fa-solid fa-play"></i> Commencer</a></button>
+                <button class="btn-primary text-black bg-blue-100"><a href="#">Voir les regles</a></button>
+        </article>
+        <article class="relative flex  items-center justify-center h-80 w-100 md:w-130 mx-auto">
+
+            <!-- Empereur -->
+            <div id="image1"
+                class="absolute left-[5%] -rotate-9 z-10 border rounded-2xl bg-amber-50">
+                <img
+                    src="https://cdn.discordapp.com/attachments/1556623549307944993/1564980651499856002/empereur.png?ex=6ae33d4f&is=6ae1ebcf&hm=8175203bce078f44baf0be8741e8691e38bd307d44f1607b43947befbabd968b&"
+                    alt="Empereur"
+                    class="w-35 md:w-50 rounded-2xl"
+                >
+                <h3 class="text-yellow-600 text-center  p-1.5">Empereur</h3>
+            </div>
+
+            <!-- Citoyen -->
+            <div id="image2"
+                class="absolute left-1/2 -translate-x-1/2 z-20 border rounded-2xl bg-amber-50 ">
+                <img
+                    src="https://cdn.discordapp.com/attachments/1556623549307944993/1564980651852169246/citoyen.png?ex=6ae33d4f&is=6ae1ebcf&hm=892ca939552542ccb2bb351663cce59c8ff1610dfa4ebc75a7fa596611545ec3&"
+                    alt="Citoyen"
+                    class="w-35 md:w-50 rounded-2xl"
+                >
+                <h3 class="text-blue-600 text-center  p-1.5">Citoyen</h3>
+            </div>
+
+            <!-- Esclave -->
+            <div id="image3"
+                class="absolute right-[5%] rotate-9 z-30 border rounded-2xl bg-amber-50">
+                <img
+                    src="https://cdn.discordapp.com/attachments/1556623549307944993/1564980652246568980/esclave.png?ex=6ae33d4f&is=6ae1ebcf&hm=bfc324ce35e6eae2bb75d24b493269ef38335b2ec4ff3a71ee6d689e4b510f30&"
+                    alt="Esclave"
+                    class="w-35 md:w-50 rounded-2xl"
+                >
+                <h3 class="text-red-500 text-center p-1.5">Esclave</h3>
+            </div>
+
+        </article>
+    </section>
 
     <script type="module" src="src/main.js"></script>
 </body>
