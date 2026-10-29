@@ -4,8 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        .btn-primary {
+            height: 3rem;
+            border-radius: 0.75rem;
+            --tw-bg-opacity: 1;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            font-weight: 700;
+            --tw-text-opacity: 1;
+            }
+        nav li{
+            position: relative;
+        }
+        nav li::after{
+            content: "";
+            width: 0;
+            height: 2px;
+            background-color: black;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        nav li:hover::after{
+            width: 100%;
+        }
+
+    </style>
 </head>
-<body>
-    <h3>Profile</h3>
+<body class="text-amber-50 bg-black">
+      
+    <header class="w-[95%] md:w-[90%] mx-auto my-4 flex flex-col md:flex-row items-center justify-between gap-4">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-crown text-3xl text-amber-500"></i>
+
+            <h1 class="font-bold text-2xl md:text-3xl">
+                <span class="text-red-400">E</span>mpereur,
+                <span class="text-blue-400">C</span>troyen,
+                <span class="text-amber-400">E</span>sclave
+            </h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex items-center gap-4 md:gap-6 rounded-full bg-amber-100 text-black px-5 py-3 ">
+
+            <ul class="flex items-center gap-4 md:gap-6">
+                <li>
+                    <a href="index.html"
+                    class="font-medium  transition-colors">
+                        Accueil
+                    </a>
+                </li>
+
+                <li>
+                    <a href="players.html"
+                    class="font-medium  transition-colors">
+                        Profils
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#"
+                    class="font-medium  transition-colors">
+                        Historique
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Dark mode -->
+            <button type="button"
+                    class="border-l border-amber-300 pl-4 text-xl  transition-colors"
+                    aria-label="Changer le thème">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+        </nav>
+
+    </header>
+    <hr class="w-[90%] mx-auto border-gray-200">
+
+    <main class="grid grid-cols-3 gap-3 my-10 p-5">
+        <section class="grid grid-cols-3 col-span-2 mx-5 gap-4">
+            <article class="col-span-3 flex justify-between ">
+                <h1 class="text-[30px] font-bold">Mes Profils</h1>
+                <button class="btn-primary bg-blue-600">+ Ajouter un profile</button>
+            </article>
+            <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2">
+                <img src="https://i.pinimg.com/736x/13/97/cd/1397cda03acfbbe0c2ec8dbc728ae8fe.jpg" 
+                class="h-40 border-2 border-white rounded-[500px]" alt="">
+                <h2>Yanis_07</h2>
+                <p>12 Parties</p>
+                <div>
+                    <button class="btn-primary bg-blue-500">Modifier</button>
+                    <button class="btn-primary bg-red-500">Modifier</button>
+                </div>
+            </article>
+           
+
+        </section>
+        <aside class="bg-red-400"> 
+        </aside>
+    </main>
+    
 </body>
 </html>
