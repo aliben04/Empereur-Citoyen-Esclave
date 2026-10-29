@@ -1,7 +1,7 @@
 
 let users=JSON.parse(localStorage.getItem("users")) || []
 let avatars=["👑","⚔️","🛡️","🦊","🐺","🐉","🦁","👻"]
-let avat=""
+
 
 function afficherAvatar(){
     let listavatar=document.querySelector(".avatar")
@@ -12,13 +12,28 @@ function afficherAvatar(){
         listavatar.append(elem)
         elem.addEventListener("click",()=>{
              for (let i = 0; i < listavatar.children.length; i++) {
-                listavatar.children[i].classList.remove("bg-blue-500");
+                listavatar.children[i].classList.remove("bg-blue-100");
             }
-            elem.classList.toggle("bg-blue-500")
+            elem.classList.toggle("bg-blue-100")
         })
 
     })
     
+}
+function afficherPlayer(player){
+    let article=document.createElement("article")
+    article.innerHTML=`
+                <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2">
+                    <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.pseudo}</p>
+                <h2>${player.avatar}</h2>
+                <p>12 Parties</p>
+                <div>
+                    <button class="btn-primary bg-blue-500">Modifier</button>
+                    <button class="btn-primary bg-red-500">Modifier</button>
+                </div>
+            </article>
+    
+    `
 }
 
 afficherAvatar()
@@ -53,11 +68,31 @@ function validatePseudo(){
             pseudo.style.boxShadow="2px 2px 5px red"
         }
     })
-    add.addEventListener("click",()=>{
-            let user={pseudo:pseudo.value,avatar:"😂"}
-            users.push(user)
-            localStorage.setItem("users",JSON.stringify(users))
-    })
+    add.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let selectedAvatar = document.querySelector("form .bg-blue-100");
+        
+        
+        if (selectedAvatar && pseudo.value!=="") {
+            let avataar = selectedAvatar.textContent;
+
+            let user = {
+                pseudo: pseudo.value,
+                avatar: avataar,
+                nbrPartie:0
+            };
+
+            users.push(user);
+
+            localStorage.setItem("users", JSON.stringify(users));
+
+        } else {
+            document.querySelector(".avatar").nextElementSibling.textContent =
+                "Tous les champs sont obligatoires !";
+            document.querySelector(".avatar").nextElementSibling.classList="text-red-500"
+        }
+    });
 
 }
 
