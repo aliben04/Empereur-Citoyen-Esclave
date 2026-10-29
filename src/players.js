@@ -20,21 +20,6 @@ function afficherAvatar(){
     })
     
 }
-function afficherPlayer(player){
-    let article=document.createElement("article")
-    article.innerHTML=`
-                <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2">
-                    <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.pseudo}</p>
-                <h2>${player.avatar}</h2>
-                <p>12 Parties</p>
-                <div>
-                    <button class="btn-primary bg-blue-500">Modifier</button>
-                    <button class="btn-primary bg-red-500">Modifier</button>
-                </div>
-            </article>
-    
-    `
-}
 
 afficherAvatar()
 function validatePseudo(){
@@ -86,6 +71,7 @@ function validatePseudo(){
             users.push(user);
 
             localStorage.setItem("users", JSON.stringify(users));
+            afficherPlayer(user)
 
         } else {
             document.querySelector(".avatar").nextElementSibling.textContent =
@@ -97,3 +83,29 @@ function validatePseudo(){
 }
 
 validatePseudo()
+
+function afficherPlayer(player){
+    let listPlayes=document.querySelector("#listPlayes")
+    let article=document.createElement("article")
+    article.innerHTML=`
+                <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2">
+                    <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.avatar}</p>
+                <h2>${player.pseudo}</h2>
+                <p>${player.nbrPartie} Parties</p>
+                <div>
+                    <button class="btn-primary bg-blue-500">Modifier</button>
+                    <button class="btn-primary bg-red-500">Modifier</button>
+                </div>
+            </article>
+    
+    `
+    listPlayes.append(article)
+    
+}
+console.log(users)
+function afficherAllPlayers(){
+    users.forEach((u)=>{
+        afficherPlayer(u)
+    })
+}
+afficherAllPlayers()
