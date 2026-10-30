@@ -1,5 +1,5 @@
-
-let users=JSON.parse(localStorage.getItem("users")) || []
+import { getPleyers,setPlayers } from "./storage.js"
+let users=getPleyers() || []
 let avatars=["👑","⚔️","🛡️","🦊","🐺","🐉","🦁","👻"]
 
 
@@ -70,7 +70,7 @@ function validatePseudo(){
 
             users.push(user);
 
-            localStorage.setItem("users", JSON.stringify(users));
+            setPlayers(users)
             afficherPlayer(user)
             pseudo.value=""
             selectedAvatar.classList.remove("bg-blue-100");
@@ -161,7 +161,7 @@ function deletPlayer(player){
 
     let index=users.indexOf(player)
     users.splice(index,1)
-    localStorage.setItem("users", JSON.stringify(users));
+    setPlayers(users)
 }
 
 function updateProfile(player,pseudo){
@@ -171,6 +171,5 @@ function updateProfile(player,pseudo){
             u.avatar=player.avatar
         }
     })
-    localStorage.setItem("users",JSON.stringify(users))
-    
+    setPlayers(users)
 }
