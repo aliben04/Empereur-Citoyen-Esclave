@@ -155,7 +155,7 @@ function afficherAllPlayers(){
         afficherPlayer(u)
     })
 }
-afficherAllPlayers()
+    afficherAllPlayers()
 
 function deletPlayer(player){
 
