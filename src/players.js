@@ -59,7 +59,7 @@ function validatePseudo(){
         let selectedAvatar = document.querySelector("form .bg-blue-100");
         
         
-        if (selectedAvatar && pseudo.value!=="") {
+        if (selectedAvatar && pseudo.value.trim() !=="") {
             let avataar = selectedAvatar.textContent;
 
             let user = {
@@ -72,7 +72,8 @@ function validatePseudo(){
 
             localStorage.setItem("users", JSON.stringify(users));
             afficherPlayer(user)
-
+            pseudo.value=""
+            selectedAvatar.classList.remove("bg-blue-100");
         } else {
             document.querySelector(".avatar").nextElementSibling.textContent =
                 "Tous les champs sont obligatoires !";
@@ -83,7 +84,9 @@ function validatePseudo(){
 }
 
 validatePseudo()
-
+let confirmation=document.querySelector("#confirmation")
+let playerSelected = null;
+let articleSelected = null;
 function afficherPlayer(player){
     let listPlayes=document.querySelector("#listPlayes")
     let article=document.createElement("article")
@@ -94,14 +97,24 @@ function afficherPlayer(player){
                 <p>${player.nbrPartie} Parties</p>
                 <div>
                     <button class="btn-primary bg-blue-500">Modifier</button>
-                    <button class="btn-primary bg-red-500">Modifier</button>
+                    <button id="supprimer" class="btn-primary bg-red-500 hover:bg-amber-400">Supprimer</button>
                 </div>
             </article>
     
     `
     listPlayes.append(article)
+    article.querySelector("#supprimer").addEventListener("click",()=>{
+        confirmation.classList.remove("hidden")
+        playerSelected = player;
+        articleSelected = article;
+    })
     
 }
+confirmation.querySelector("#yes").addEventListener("click",()=>{
+    deletPlayer(playerSelected)
+    articleSelected.remove()
+    confirmation.classList.add("hidden")
+})
 console.log(users)
 function afficherAllPlayers(){
     users.forEach((u)=>{
@@ -109,3 +122,10 @@ function afficherAllPlayers(){
     })
 }
 afficherAllPlayers()
+
+function deletPlayer(player){
+
+    let index=users.indexOf(player)
+    users.splice(index,1)
+    localStorage.setItem("users", JSON.stringify(users));
+}
