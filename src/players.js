@@ -3,8 +3,8 @@ let users=JSON.parse(localStorage.getItem("users")) || []
 let avatars=["👑","⚔️","🛡️","🦊","🐺","🐉","🦁","👻"]
 
 
+let listavatar=document.querySelector(".avatar")
 function afficherAvatar(){
-    let listavatar=document.querySelector(".avatar")
     avatars.forEach((a)=>{
         let elem=document.createElement("p")
         elem.textContent=a
@@ -87,6 +87,7 @@ validatePseudo()
 let confirmation=document.querySelector("#confirmation")
 let playerSelected = null;
 let articleSelected = null;
+let aside = document.querySelector("aside");
 function afficherPlayer(player){
     let listPlayes=document.querySelector("#listPlayes")
     let article=document.createElement("article")
@@ -96,7 +97,7 @@ function afficherPlayer(player){
                 <h2>${player.pseudo}</h2>
                 <p>${player.nbrPartie} Parties</p>
                 <div>
-                    <button class="btn-primary bg-blue-500">Modifier</button>
+                    <button id="update" class="btn-primary bg-blue-500">Modifier</button>
                     <button id="supprimer" class="btn-primary bg-red-500 hover:bg-amber-400">Supprimer</button>
                 </div>
             </article>
@@ -108,6 +109,39 @@ function afficherPlayer(player){
         playerSelected = player;
         articleSelected = article;
     })
+    article.querySelector("#update").addEventListener("click",()=>{
+        document.querySelector("[name=\"add\"]").classList.add("hidden")
+        document.querySelector("[name=\"update\"]").classList.remove("hidden")
+
+        aside.querySelector("h1").textContent="modifier un profile"
+        let pseudo=document.querySelector("form [name=\"pseudo\"]")
+        pseudo.value=player.pseudo
+
+        for (let i = 0; i < listavatar.children.length; i++) {
+            if(listavatar.children[i].textContent===player.avatar){
+
+                listavatar.children[i].classList.add("bg-blue-100");
+            }
+        }
+        document.querySelector("[name=\"update\"]").addEventListener("click",(e)=>{
+            if(pseudo.value===""){
+
+                e.preventDefault()
+            }else{
+                let newpl={
+                pseudo: pseudo.value,
+                avatar:  document.querySelector("form .bg-blue-100").textContent,
+                nbrPartie:0
+            }
+               
+                updateProfile(newpl,player.pseudo) 
+                
+            }
+            
+           
+        })
+
+    })
     
 }
 confirmation.querySelector("#yes").addEventListener("click",()=>{
@@ -115,7 +149,7 @@ confirmation.querySelector("#yes").addEventListener("click",()=>{
     articleSelected.remove()
     confirmation.classList.add("hidden")
 })
-console.log(users)
+
 function afficherAllPlayers(){
     users.forEach((u)=>{
         afficherPlayer(u)
@@ -128,4 +162,15 @@ function deletPlayer(player){
     let index=users.indexOf(player)
     users.splice(index,1)
     localStorage.setItem("users", JSON.stringify(users));
+}
+
+function updateProfile(player,pseudo){
+    users.forEach((u)=>{
+        if(u.pseudo===pseudo){
+            u.pseudo=player.pseudo
+            u.avatar=player.avatar
+        }
+    })
+    localStorage.setItem("users",JSON.stringify(users))
+    
 }
