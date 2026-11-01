@@ -7,7 +7,7 @@ export function setPlayers(data){
 
 
 export function getChoosePlayer(){
-    return JSON.parse(localStorage.getItem("player"))
+    return JSON.parse(localStorage.getItem("player")) || null
 }
 export function setChoosePlayer(data){
     return localStorage.setItem("player",JSON.stringify(data))

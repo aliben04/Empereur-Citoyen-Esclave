@@ -1,6 +1,7 @@
-import { getPleyers,setPlayers } from "./storage.js"
+import { getPleyers,setPlayers,getChoosePlayer,setChoosePlayer } from "./storage.js"
 let users=getPleyers() || []
 let avatars=["👑","⚔️","🛡️","🦊","🐺","🐉","🦁","👻"]
+let play=getChoosePlayer() ;
 
 
 let listavatar=document.querySelector(".avatar")
@@ -92,7 +93,7 @@ function afficherPlayer(player){
     let listPlayes=document.querySelector("#listPlayes")
     let article=document.createElement("article")
     article.innerHTML=`
-                <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2">
+                <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2 hover:shadow-[0_0_15px_yellow]">
                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.avatar}</p>
                 <h2>${player.pseudo}</h2>
                 <p>${player.nbrPartie} Parties</p>
@@ -103,6 +104,15 @@ function afficherPlayer(player){
             </article>
     
     `
+    article.addEventListener("click",()=>{
+        for (let i = 0; i < listPlayes.children.length; i++) {
+                listPlayes.children[i].classList.remove("shadow-[0_0_15px_yellow]");
+            }
+        article.classList.add("shadow-[0_0_15px_yellow]")
+        article.classList.add("rounded-2xl")
+        setChoosePlayer(player)
+        afficherPlayerSelect(player)
+    })
     listPlayes.append(article)
     article.querySelector("#supprimer").addEventListener("click",()=>{
         confirmation.classList.remove("hidden")
@@ -119,7 +129,6 @@ function afficherPlayer(player){
 
         for (let i = 0; i < listavatar.children.length; i++) {
             if(listavatar.children[i].textContent===player.avatar){
-
                 listavatar.children[i].classList.add("bg-blue-100");
             }
         }
@@ -133,11 +142,9 @@ function afficherPlayer(player){
                 avatar:  document.querySelector("form .bg-blue-100").textContent,
                 nbrPartie:0
             }
-               
                 updateProfile(newpl,player.pseudo) 
-                
+                setChoosePlayer(player)
             }
-            
            
         })
 
@@ -147,6 +154,13 @@ function afficherPlayer(player){
 confirmation.querySelector("#yes").addEventListener("click",()=>{
     deletPlayer(playerSelected)
     articleSelected.remove()
+    confirmation.classList.add("hidden")
+    if(playerSelected.pseudo===getPleyers().pseudo){
+        localStorage.removeItem("player")
+    }
+    afficherPlayerSelect()
+})
+confirmation.querySelector("#no").addEventListener("click",()=>{
     confirmation.classList.add("hidden")
 })
 
@@ -162,6 +176,7 @@ function deletPlayer(player){
     let index=users.indexOf(player)
     users.splice(index,1)
     setPlayers(users)
+    localStorage.removeItem("player")
 }
 
 function updateProfile(player,pseudo){
@@ -173,3 +188,35 @@ function updateProfile(player,pseudo){
     })
     setPlayers(users)
 }
+
+
+
+
+
+function afficherPlayerSelect(player){
+    let p=document.querySelector("#player")
+    if(player && player.pseudo){
+
+        p.innerHTML=`
+                    <p class="p-2 text-[30px] border-2 border-white rounded-[500px] cursor-pointer ">${player.avatar}</p>
+                    <div>
+                        <h3 class="font-bold text-xl">${player.pseudo}</h3>
+                        <p class="text-mist-500">(Joueur actif)</p>
+                    </div>
+        `
+    }else{
+         p.innerHTML=`
+                <p class="p-2 text-[30px] border-2 border-white rounded-[500px] cursor-pointer ">👤</p>
+                <div>
+                    <h3 class="font-bold text-xl">*******</h3>
+                    <p class="text-mist-500">(Joueur actif)</p>
+                </div>
+    `
+    }
+    
+    
+}
+
+
+
+afficherPlayerSelect(play)
