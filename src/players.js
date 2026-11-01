@@ -95,20 +95,21 @@ function afficherPlayer(player){
     article.innerHTML=`
                 <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2 hover:shadow-[0_0_15px_yellow]">
                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.avatar}</p>
-                <h2>${player.pseudo}</h2>
-                <p>${player.nbrPartie} Parties</p>
-                <div>
-                    <button id="update" class="btn-primary bg-blue-500">Modifier</button>
-                    <button id="supprimer" class="btn-primary bg-red-500 hover:bg-amber-400">Supprimer</button>
-                </div>
+                    <h2>${player.pseudo}</h2>
+                    <p>${player.nbrPartie} Parties</p>
+                    <div>
+                        <button id="update" class="btn-primary bg-blue-500">Modifier</button>
+                        <button id="supprimer" class="btn-primary bg-red-500 hover:bg-amber-400">Supprimer</button>
+                    </div>
             </article>
     
     `
     article.addEventListener("click",()=>{
         for (let i = 0; i < listPlayes.children.length; i++) {
-                listPlayes.children[i].classList.remove("shadow-[0_0_15px_yellow]");
+                listPlayes.children[i].classList.remove("bg-gray-400");
             }
-        article.classList.add("shadow-[0_0_15px_yellow]")
+
+        article.classList.add("bg-gray-400")
         article.classList.add("rounded-2xl")
         setChoosePlayer(player)
         afficherPlayerSelect(player)
@@ -217,6 +218,27 @@ function afficherPlayerSelect(player){
     
 }
 
-
+console.log(play)
 
 afficherPlayerSelect(play)
+
+
+let cnfPlayer=document.querySelector("#confirmationPlayer")
+function preventLaunch(){
+    let btn=document.querySelector("#btnStart")
+    btn.addEventListener("click",(e)=>{
+        if(play===null){
+            cnfPlayer.classList.remove("hidden")
+            e.preventDefault()
+        }
+    })
+}
+preventLaunch()
+
+function confirmationPlayer(){
+    cnfPlayer.addEventListener("click",()=>{
+        cnfPlayer.classList.add("hidden")
+    })
+}
+
+confirmationPlayer()
