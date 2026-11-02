@@ -93,7 +93,7 @@ function afficherPlayer(player){
     let listPlayes=document.querySelector("#listPlayes")
     let article=document.createElement("article")
     article.innerHTML=`
-                <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2 hover:shadow-[0_0_15px_yellow]">
+            <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2 hover:shadow-[0_0_15px_yellow] focus:bg-gray-400">
                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.avatar}</p>
                     <h2>${player.pseudo}</h2>
                     <p>${player.nbrPartie} Parties</p>
@@ -104,10 +104,13 @@ function afficherPlayer(player){
             </article>
     
     `
+    if (play && play.pseudo === player.pseudo) {
+            article.classList.add("bg-gray-400", "rounded-2xl");
+    }
     article.addEventListener("click",()=>{
         for (let i = 0; i < listPlayes.children.length; i++) {
                 listPlayes.children[i].classList.remove("bg-gray-400");
-            }
+        }
 
         article.classList.add("bg-gray-400")
         article.classList.add("rounded-2xl")
@@ -205,6 +208,7 @@ function afficherPlayerSelect(player){
                         <p class="text-mist-500">(Joueur actif)</p>
                     </div>
         `
+
     }else{
          p.innerHTML=`
                 <p class="p-2 text-[30px] border-2 border-white rounded-[500px] cursor-pointer ">👤</p>
@@ -228,8 +232,8 @@ function preventLaunch(){
     let btn=document.querySelector("#btnStart")
     btn.addEventListener("click",(e)=>{
         if(play===null){
-            cnfPlayer.classList.remove("hidden")
             e.preventDefault()
+            cnfPlayer.classList.remove("hidden")
         }
     })
 }
