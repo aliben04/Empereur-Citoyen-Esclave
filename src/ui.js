@@ -1,4 +1,4 @@
-import { afficherAvatar,validatePseudo,afficherAllPlayers,afficherPlayerSelect,preventLaunch,confirmationPlayer } from "./players.js";
+import { afficherAvatar,validatePseudo,afficherAllPlayers,afficherPlayerSelect,preventLaunch,confirmationPlayer ,confirmationPopUp} from "./players.js";
 import { getChoosePlayer } from "./storage.js";
 
 afficherAvatar()
@@ -14,3 +14,5 @@ afficherPlayerSelect(player)
 preventLaunch()
 
 confirmationPlayer()
+
+confirmationPopUp()
