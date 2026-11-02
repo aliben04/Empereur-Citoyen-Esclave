@@ -155,18 +155,20 @@ export function afficherPlayer(player){
     })
     
 }
-confirmation.querySelector("#yes").addEventListener("click",()=>{
-    deletPlayer(playerSelected)
-    articleSelected.remove()
-    confirmation.classList.add("hidden")
-    if(playerSelected.pseudo===getPleyers().pseudo){
-        localStorage.removeItem("player")
-    }
-    afficherPlayerSelect()
-})
-confirmation.querySelector("#no").addEventListener("click",()=>{
-    confirmation.classList.add("hidden")
-})
+export function confirmationPopUp(){
+    confirmation.querySelector("#yes").addEventListener("click",()=>{
+        deletPlayer(playerSelected)
+        articleSelected.remove()
+        confirmation.classList.add("hidden")
+        if(playerSelected.pseudo===getPleyers().pseudo){
+            localStorage.removeItem("player")
+        }
+        afficherPlayerSelect()
+    })
+    confirmation.querySelector("#no").addEventListener("click",()=>{
+        confirmation.classList.add("hidden")
+    })
+}
 
 export function afficherAllPlayers(){
     users.forEach((u)=>{
