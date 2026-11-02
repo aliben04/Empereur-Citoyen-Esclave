@@ -5,7 +5,7 @@ let play=getChoosePlayer() ;
 
 
 let listavatar=document.querySelector(".avatar")
-function afficherAvatar(){
+export function afficherAvatar(){
     avatars.forEach((a)=>{
         let elem=document.createElement("p")
         elem.textContent=a
@@ -22,8 +22,8 @@ function afficherAvatar(){
     
 }
 
-afficherAvatar()
-function validatePseudo(){
+
+export function validatePseudo(){
     let pseudo=document.querySelector("[name=\"pseudo\"]")
     let add=document.querySelector("#add")
     let error=pseudo.nextElementSibling
@@ -84,12 +84,12 @@ function validatePseudo(){
 
 }
 
-validatePseudo()
+
 let confirmation=document.querySelector("#confirmation")
 let playerSelected = null;
 let articleSelected = null;
 let aside = document.querySelector("aside");
-function afficherPlayer(player){
+export function afficherPlayer(player){
     let listPlayes=document.querySelector("#listPlayes")
     let article=document.createElement("article")
     article.innerHTML=`
@@ -168,12 +168,12 @@ confirmation.querySelector("#no").addEventListener("click",()=>{
     confirmation.classList.add("hidden")
 })
 
-function afficherAllPlayers(){
+export function afficherAllPlayers(){
     users.forEach((u)=>{
         afficherPlayer(u)
     })
 }
-    afficherAllPlayers()
+
 
 function deletPlayer(player){
 
@@ -197,7 +197,7 @@ function updateProfile(player,pseudo){
 
 
 
-function afficherPlayerSelect(player){
+export function afficherPlayerSelect(player){
     let p=document.querySelector("#player")
     if(player && player.pseudo){
 
@@ -222,13 +222,8 @@ function afficherPlayerSelect(player){
     
 }
 
-console.log(play)
-
-afficherPlayerSelect(play)
-
-
 let cnfPlayer=document.querySelector("#confirmationPlayer")
-function preventLaunch(){
+export function preventLaunch(){
     let btn=document.querySelector("#btnStart")
     btn.addEventListener("click",(e)=>{
         if(play===null){
@@ -237,12 +232,11 @@ function preventLaunch(){
         }
     })
 }
-preventLaunch()
 
-function confirmationPlayer(){
+
+export function confirmationPlayer(){
     cnfPlayer.addEventListener("click",()=>{
         cnfPlayer.classList.add("hidden")
     })
 }
 
-confirmationPlayer()
