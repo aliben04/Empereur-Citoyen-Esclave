@@ -32,23 +32,22 @@ function addCart(handMain,handOrd){
                 ordinateur.classList.add("flip");
 
                 setTimeout(()=>{
-
+                    
                     main.setAttribute("src",handMain[i])
                     let indexord=Math.floor(Math.random ()*handOrd.length)
                     ordinateur.setAttribute("src",handOrd[indexord])
                     main.classList.remove("flip");
                     ordinateur.classList.remove("flip");
-
-                    console.log(duel(handMain[i],handOrd[indexord]))
+                    caseEgalite(i,indexord,duel(handMain[i],handOrd[indexord]))
                 },600)
-
-        })
+                
+            })
         meCarts.append(img)
         mainCarts.append(imgor)
     }
 
 }
-addCart(mainJoueur,mainOrdinateur)
+
 
 
 
@@ -74,6 +73,23 @@ function duel(cj,co){
 
 
 
+let copieJoueur = [...mainJoueur];
+let copieOrdinateur = [...mainOrdinateur];
+function caseEgalite(indexJ,indexO,caseEg){
 
+    if(caseEg==="égalité"){
+        meCarts.innerHTML=""
+        mainCarts.innerHTML=""
+
+        copieJoueur.splice(indexJ,1)
+        copieOrdinateur.splice(indexO,1)
+        addCart(copieJoueur,copieOrdinateur)
+    }
+    console.log(copieJoueur)
+    console.log(copieOrdinateur)
+     
+}
+
+addCart(copieJoueur,copieOrdinateur)
 
 
