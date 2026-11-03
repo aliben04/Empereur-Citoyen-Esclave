@@ -15,17 +15,17 @@ let mainCarts=document.querySelector("#mainCarts")
 
 let main=document.querySelector("#main")
 let ordinateur=document.querySelector("#ordinateur")
-function addCart(){
+function addCart(handMain,handOrd){
 
-    for(let i=0;i<mainJoueur.length;i++){
+    for(let i=0;i<handMain.length;i++){
         let img=document.createElement("img")
         let imgor=document.createElement("img")
 
-        img.setAttribute("src",mainJoueur[i])
+        img.setAttribute("src",handMain[i])
         imgor.setAttribute("src","image/carteRoi.png")
 
-        img.classList="h-40 rounded-2xl cursor-pointer"
-        imgor.classList="h-40 rounded-2xl"
+        img.classList="h-35 rounded-2xl cursor-pointer"
+        imgor.classList="h-35 rounded-2xl"
         
         img.addEventListener("click",()=>{
                 main.classList.add("flip")
@@ -33,12 +33,13 @@ function addCart(){
 
                 setTimeout(()=>{
 
-                    main.setAttribute("src",mainJoueur[i])
-                    let indexord=Math.floor(Math.random ()*mainOrdinateur.length)
-                    ordinateur.setAttribute("src",mainOrdinateur[indexord])
+                    main.setAttribute("src",handMain[i])
+                    let indexord=Math.floor(Math.random ()*handOrd.length)
+                    ordinateur.setAttribute("src",handOrd[indexord])
                     main.classList.remove("flip");
                     ordinateur.classList.remove("flip");
 
+                    console.log(duel(handMain[i],handOrd[indexord]))
                 },600)
 
         })
@@ -47,7 +48,29 @@ function addCart(){
     }
 
 }
-addCart()
+addCart(mainJoueur,mainOrdinateur)
+
+
+
+function duel(cj,co){
+
+    if(cj.includes("empereur")  &&  co.includes("citoyen")){
+        return "victoire"
+    }else if(cj.includes("citoyen") && co.includes("empereur")){
+        return "défaite"
+    }else if(cj.includes("empereur") && co.includes("esclave")){
+        return "défaite"
+    }else if(cj.includes("esclave") && co.includes("empereur")){
+        return "victoire"
+    }else if(cj.includes("esclave") && co.includes("citoyen")){
+        return "défaite"
+    }else if(cj.includes("citoyen") && co.includes("esclave")){
+        return "victoire"
+    }
+    else{
+        return "égalité"
+    }
+}
 
 
 
