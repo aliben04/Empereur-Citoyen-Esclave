@@ -28,10 +28,19 @@ function addCart(){
         imgor.classList="h-40 rounded-2xl"
         
         img.addEventListener("click",()=>{
-                main.setAttribute("src",mainJoueur[i])
-                let indexord=Math.floor(Math.random ()*mainOrdinateur.length)
-                ordinateur.setAttribute("src",mainOrdinateur[indexord])
-                console.log(indexord)
+                main.classList.add("flip")
+                ordinateur.classList.add("flip");
+
+                setTimeout(()=>{
+
+                    main.setAttribute("src",mainJoueur[i])
+                    let indexord=Math.floor(Math.random ()*mainOrdinateur.length)
+                    ordinateur.setAttribute("src",mainOrdinateur[indexord])
+                    main.classList.remove("flip");
+                    ordinateur.classList.remove("flip");
+
+                },600)
+
         })
         meCarts.append(img)
         mainCarts.append(imgor)
