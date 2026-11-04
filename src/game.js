@@ -141,6 +141,12 @@ function caseEgalite(indexJ,indexO,caseEg){
     }
     game.partie.groupe=Math.floor(game.partie.manche/3)+1
      manageRounds()
+     if(game.partie.manche===6){
+        
+       
+        showResult()
+    }
+    console.log(game.partie.manche)
 
      
 }
@@ -183,3 +189,40 @@ function changerMain(){
     }
         
 }
+
+
+function showResult(){
+    let result = document.querySelector("#result")
+    let casePlayer=document.querySelector("#casePlayer")
+    let finalPlayerScore=document.querySelector("#finalPlayerScore")
+    let finalComputerScore=document.querySelector("#finalComputerScore")
+    let replay=document.querySelector("#replay")
+    let scorePl=game.joueur.score
+    let scoreOr=game.ordinateur.score
+        
+    result.classList.remove("hidden")
+    if(scorePl>scoreOr){
+        casePlayer.textContent="🏆 victoire"
+    }else if((scorePl<scoreOr)){
+        casePlayer.textContent="😔 défaite"
+    }else{
+        casePlayer.textContent="😒 égalité"
+    }
+
+    finalPlayerScore.textContent=game.joueur.score
+    finalComputerScore.textContent=game.ordinateur.score
+    replay.addEventListener("click",()=>{
+        game.partie.manche=0
+        game.partie.groupe=Math.floor(game.partie.manche/3)+1
+
+        game.joueur.score=0
+        game.ordinateur.score=0
+        caseR.textContent="Start Game"
+        manageRounds()
+        displayScore()
+        result.classList.add("hidden")
+        
+    })
+
+}
+
