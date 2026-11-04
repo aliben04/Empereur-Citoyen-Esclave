@@ -63,11 +63,14 @@ function addCart(handMain,handOrd){
                     main.setAttribute("src",handMain[i])
                     let indexord=Math.floor(Math.random ()*handOrd.length)
                     ordinateur.setAttribute("src",handOrd[indexord])
+
                     main.classList.remove("flip");
                     ordinateur.classList.remove("flip");
                     let res=duel(handMain[i],handOrd[indexord])
+
                     game.joueur.score+=res.scorj
                     game.ordinateur.score+=res.scorO
+
                     localStorage.setItem("game",JSON.stringify(game))
                     caseEgalite(i,indexord,res.result)
                     AfficherResult(res.result)
@@ -129,17 +132,22 @@ function caseEgalite(indexJ,indexO,caseEg){
     }else if (caseEg=== "victoire"){
         meCarts.innerHTML=""
         mainCarts.innerHTML=""
+        game.partie.manche+=1
         copieJoueur = [...mainJoueur]
         copieOrdinateur = [...mainOrdinateur]
         addCart(mainJoueur,mainOrdinateur)
     }else{
         meCarts.innerHTML=""
         mainCarts.innerHTML=""
+        game.partie.manche+=1
         copieJoueur = [...mainJoueur]
         copieOrdinateur = [...mainOrdinateur]
         addCart(mainJoueur,mainOrdinateur)
 
     }
+    game.partie.groupe=Math.floor(game.partie.manche/3)+1
+     manageRounds()
+
      
 }
 
@@ -162,4 +170,12 @@ function displayScore(){
 
     monS.textContent=game.joueur.score
     scoreO.textContent=game.ordinateur.score
+}
+
+function manageRounds(){
+    let rounds=document.querySelector("#rounds")
+    let groupe=document.querySelector("#groupe")
+
+    rounds.textContent=game.partie.manche
+    groupe.textContent=game.partie.groupe
 }
