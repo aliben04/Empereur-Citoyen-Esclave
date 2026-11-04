@@ -1,8 +1,34 @@
 import { afficherPlayerSelect } from "./players.js";
 import { getChoosePlayer } from "./storage.js";
 
+let game = {
+    joueur: {
+        pseudo: "",
+        avatar: "",
+        cartes: [],
+        score: 0
+    },
 
+    ordinateur: {
+        cartes: [],
+        score: 0
+    },
+
+    partie: {
+        manche: 0,
+        groupe: 1,
+        totalManches: 12,
+    //    premierJoueur: "",
+        termine: false
+    },
+
+    duel: {
+        resultat: ""
+    }
+};
 let plyer=getChoosePlayer()
+game.joueur.pseudo=plyer.pseudo
+game.joueur.avatar=plyer.avatar
 
 afficherPlayerSelect(plyer)
 
@@ -38,7 +64,9 @@ function addCart(handMain,handOrd){
                     ordinateur.setAttribute("src",handOrd[indexord])
                     main.classList.remove("flip");
                     ordinateur.classList.remove("flip");
-                    caseEgalite(i,indexord,duel(handMain[i],handOrd[indexord]))
+                    let res=duel(handMain[i],handOrd[indexord])
+                    caseEgalite(i,indexord,res.result)
+                    AfficherResult(res.result)
                 },600)
                 
             })
@@ -54,20 +82,25 @@ function addCart(handMain,handOrd){
 function duel(cj,co){
 
     if(cj.includes("empereur")  &&  co.includes("citoyen")){
-        return "victoire"
-    }else if(cj.includes("citoyen") && co.includes("empereur")){
-        return "défaite"
-    }else if(cj.includes("empereur") && co.includes("esclave")){
-        return "défaite"
-    }else if(cj.includes("esclave") && co.includes("empereur")){
-        return "victoire"
-    }else if(cj.includes("esclave") && co.includes("citoyen")){
-        return "défaite"
-    }else if(cj.includes("citoyen") && co.includes("esclave")){
-        return "victoire"
+        return {result:"victoire",scorj:1,scorO:0}
+    }
+    else if(cj.includes("citoyen") && co.includes("empereur")){
+        return  {result:"défaite",scorj:0,scorO:1}
+    }
+    else if(cj.includes("empereur") && co.includes("esclave")){
+        return {result:"défaite",scorj:0,scorO:5}
+    }
+    else if(cj.includes("esclave") && co.includes("empereur")){
+        return  {result:"victoire",scorj:5,scorO:0}
+    }
+    else if(cj.includes("esclave") && co.includes("citoyen")){
+        return {result:"défaite",scorj:0,scorO:1}
+    }
+    else if(cj.includes("citoyen") && co.includes("esclave")){
+        return {result:"victoire",scorj:1,scorO:0}
     }
     else{
-        return "égalité"
+        return  {result:"égalité",scorj:0,scorO:0}
     }
 }
 
@@ -75,6 +108,8 @@ function duel(cj,co){
 
 let copieJoueur = [...mainJoueur];
 let copieOrdinateur = [...mainOrdinateur];
+game.joueur.cartes=copieJoueur
+game.ordinateur.cartes=copieOrdinateur
 function caseEgalite(indexJ,indexO,caseEg){
 
     if(caseEg==="égalité"){
@@ -85,11 +120,17 @@ function caseEgalite(indexJ,indexO,caseEg){
         copieOrdinateur.splice(indexO,1)
         addCart(copieJoueur,copieOrdinateur)
     }
-    console.log(copieJoueur)
-    console.log(copieOrdinateur)
      
 }
 
 addCart(copieJoueur,copieOrdinateur)
 
 
+function AfficherResult(result){
+    let caseR=document.querySelector(".result")
+    switch(result){
+        case "victoire": caseR.textContent="🏆 victoire"; break
+        case "égalité": caseR.textContent="😒 égalité"; break
+        case "défaite": caseR.textContent=" 😔 défaite";break
+    }
+}
