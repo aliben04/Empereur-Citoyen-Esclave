@@ -80,12 +80,66 @@
                 <img id="ordinateur" src="" alt="" class="h-40 rounded-2xl">
             </div>
             <div class="flex flex-col justify-center items-center p-3 my-5 w-70 border border-white rounded-2xl gap-3">
-                <div class="result">🏆 Win</div>
-                <p id="reason" >Lorem ipsum dolor sit amet consect adipisicing elit</p>
+                <div class="result">Start Game</div>
+               
             </div>
 
         </aside>
     </main>
+     <div id="result" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+
+        <div class="bg-white w-100 p-2 rounded-2xl p-8 shadow-2xl text-center">
+
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                Game Over!
+            </h2>
+
+            <p id="casePlayer" class="text-xl font-bold text-yellow-600 mb-6">
+                Player Wins!
+            </p>
+
+            <!-- Final Score -->
+            <div class="bg-gray-100 rounded-xl p-5 mb-6">
+
+                <h3 class="text-lg font-bold text-gray-700 mb-4">
+                    Final Score
+                </h3>
+
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold text-gray-700">
+                        👤 Player
+                    </span>
+                    <span id="finalPlayerScore" class="font-bold text-2xl text-blue-600">
+                        0
+                    </span>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <span class="font-semibold text-gray-700">
+                        🤖 Computer
+                    </span>
+                    <span id="finalComputerScore" class="font-bold text-2xl text-red-500">
+                        0
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex gap-3">
+
+                <button id="replay" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl">
+                    🔄 Play Again
+                </button>
+
+                <button id="quit" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-xl">
+                    <a href="players.html">Quit Game</a>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
     <script type="module" src="src/game.js"></script>
 </body>
 </html>
