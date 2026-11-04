@@ -18,7 +18,7 @@ let game = {
         manche: 0,
         groupe: 1,
         totalManches: 12,
-    //    premierJoueur: "",
+        premierJoueur: "main",
         termine: false
     },
 
@@ -129,17 +129,11 @@ function caseEgalite(indexJ,indexO,caseEg){
         copieJoueur.splice(indexJ,1)
         copieOrdinateur.splice(indexO,1)
         addCart(copieJoueur,copieOrdinateur)
-    }else if (caseEg=== "victoire"){
-        meCarts.innerHTML=""
-        mainCarts.innerHTML=""
-        game.partie.manche+=1
-        copieJoueur = [...mainJoueur]
-        copieOrdinateur = [...mainOrdinateur]
-        addCart(mainJoueur,mainOrdinateur)
     }else{
         meCarts.innerHTML=""
         mainCarts.innerHTML=""
-        game.partie.manche+=1
+        game.partie.manche++
+        changerMain()
         copieJoueur = [...mainJoueur]
         copieOrdinateur = [...mainOrdinateur]
         addCart(mainJoueur,mainOrdinateur)
@@ -178,4 +172,14 @@ function manageRounds(){
 
     rounds.textContent=game.partie.manche
     groupe.textContent=game.partie.groupe
+}
+
+function changerMain(){
+    if(game.partie.manche % 3 === 0){
+        let newlist=mainJoueur
+        mainJoueur=mainOrdinateur
+        mainOrdinateur=newlist
+        
+    }
+        
 }
