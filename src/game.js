@@ -26,6 +26,7 @@ let game = {
         resultat: ""
     }
 };
+let gameInLocal=JSON.parse(localStorage.getItem("game")) || []
 let plyer=getChoosePlayer()
 game.joueur.pseudo=plyer.pseudo
 game.joueur.avatar=plyer.avatar
@@ -65,8 +66,12 @@ function addCart(handMain,handOrd){
                     main.classList.remove("flip");
                     ordinateur.classList.remove("flip");
                     let res=duel(handMain[i],handOrd[indexord])
+                    game.joueur.score+=res.scorj
+                    game.ordinateur.score+=res.scorO
+                    localStorage.setItem("game",JSON.stringify(game))
                     caseEgalite(i,indexord,res.result)
                     AfficherResult(res.result)
+                    displayScore()
                 },600)
                 
             })
@@ -108,8 +113,10 @@ function duel(cj,co){
 
 let copieJoueur = [...mainJoueur];
 let copieOrdinateur = [...mainOrdinateur];
+
 game.joueur.cartes=copieJoueur
 game.ordinateur.cartes=copieOrdinateur
+
 function caseEgalite(indexJ,indexO,caseEg){
 
     if(caseEg==="égalité"){
@@ -119,6 +126,19 @@ function caseEgalite(indexJ,indexO,caseEg){
         copieJoueur.splice(indexJ,1)
         copieOrdinateur.splice(indexO,1)
         addCart(copieJoueur,copieOrdinateur)
+    }else if (caseEg=== "victoire"){
+        meCarts.innerHTML=""
+        mainCarts.innerHTML=""
+        copieJoueur = [...mainJoueur]
+        copieOrdinateur = [...mainOrdinateur]
+        addCart(mainJoueur,mainOrdinateur)
+    }else{
+        meCarts.innerHTML=""
+        mainCarts.innerHTML=""
+        copieJoueur = [...mainJoueur]
+        copieOrdinateur = [...mainOrdinateur]
+        addCart(mainJoueur,mainOrdinateur)
+
     }
      
 }
@@ -133,4 +153,13 @@ function AfficherResult(result){
         case "égalité": caseR.textContent="😒 égalité"; break
         case "défaite": caseR.textContent=" 😔 défaite";break
     }
+}
+
+
+function displayScore(){
+    let monS=document.querySelector("#monS")
+    let scoreO=document.querySelector("#scoreO")
+
+    monS.textContent=game.joueur.score
+    scoreO.textContent=game.ordinateur.score
 }
