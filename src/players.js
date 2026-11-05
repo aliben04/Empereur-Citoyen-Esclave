@@ -204,9 +204,9 @@ export function afficherPlayerSelect(player){
     if(player && player.pseudo){
 
         p.innerHTML=`
-                    <p class="p-2 text-[30px] border-2 border-white rounded-[500px] cursor-pointer ">${player.avatar}</p>
+                    <p class="p-2 text-[20px] md:text-[30px] border-2 border-white rounded-[500px] cursor-pointer ">${player.avatar}</p>
                     <div>
-                        <h3 class="font-bold text-xl">${player.pseudo}</h3>
+                        <h3 class="font-bold">${player.pseudo}</h3>
                         <p class="text-mist-500">(Joueur actif)</p>
                     </div>
         `

@@ -1,32 +1,29 @@
 import { afficherPlayerSelect } from "./players.js";
-import { getChoosePlayer } from "./storage.js";
+import { getChoosePlayer, getHistory, setChoosePlayer, setHistory } from "./storage.js";
 
 let game = {
     joueur: {
         pseudo: "",
         avatar: "",
-        cartes: [],
         score: 0
     },
 
     ordinateur: {
-        cartes: [],
         score: 0
     },
 
     partie: {
         manche: 0,
         groupe: 1,
-        totalManches: 12,
-        premierJoueur: "main",
-        termine: false
+        totalManches: 12
     },
 
     duel: {
         resultat: ""
     }
 };
-let gameInLocal=JSON.parse(localStorage.getItem("game")) || []
+
+let history=getHistory()
 let plyer=getChoosePlayer()
 game.joueur.pseudo=plyer.pseudo
 game.joueur.avatar=plyer.avatar
@@ -51,8 +48,8 @@ function addCart(handMain,handOrd){
         img.setAttribute("src",handMain[i])
         imgor.setAttribute("src","image/carteRoi.png")
 
-        img.classList="h-35 rounded-2xl cursor-pointer"
-        imgor.classList="h-35 rounded-2xl"
+        img.classList=" h-20 md:h-30 lg:35 rounded-2xl cursor-pointer"
+        imgor.classList="h-20 md:h-30 lg:35 rounded-2xl"
         
         img.addEventListener("click",()=>{
                 main.classList.add("flip")
@@ -117,9 +114,6 @@ function duel(cj,co){
 let copieJoueur = [...mainJoueur];
 let copieOrdinateur = [...mainOrdinateur];
 
-game.joueur.cartes=copieJoueur
-game.ordinateur.cartes=copieOrdinateur
-
 function caseEgalite(indexJ,indexO,caseEg){
 
     if(caseEg==="égalité"){
@@ -141,10 +135,21 @@ function caseEgalite(indexJ,indexO,caseEg){
     }
     game.partie.groupe=Math.floor(game.partie.manche/3)+1
      manageRounds()
-     if(game.partie.manche===6){
-        
-       
+     if(game.partie.manche===game.partie.totalManches){
         showResult()
+        plyer.nbrPartie++
+        setChoosePlayer(plyer)
+         let histor_y={
+            id: "g_"+ Date.now(),
+            joueur:getChoosePlayer(),
+            date: new Date().toString().slice(0,21),
+            playerScore: game.joueur.score,
+            computerScore: game.ordinateur.score,
+            result: game.duel.resultat     // "victoire", "défaite" ou "égalité"
+        }
+         history.push(histor_y)
+         setHistory(history)
+       
     }
     console.log(game.partie.manche)
 
@@ -197,20 +202,27 @@ function showResult(){
     let finalPlayerScore=document.querySelector("#finalPlayerScore")
     let finalComputerScore=document.querySelector("#finalComputerScore")
     let replay=document.querySelector("#replay")
+    let caseR=document.querySelector(".result")
+
     let scorePl=game.joueur.score
     let scoreOr=game.ordinateur.score
         
     result.classList.remove("hidden")
+
     if(scorePl>scoreOr){
         casePlayer.textContent="🏆 victoire"
+        game.duel.resultat="victoire"
     }else if((scorePl<scoreOr)){
         casePlayer.textContent="😔 défaite"
+        game.duel.resultat="défaite"
     }else{
         casePlayer.textContent="😒 égalité"
+        game.duel.resultat="égalité"
     }
 
     finalPlayerScore.textContent=game.joueur.score
     finalComputerScore.textContent=game.ordinateur.score
+
     replay.addEventListener("click",()=>{
         game.partie.manche=0
         game.partie.groupe=Math.floor(game.partie.manche/3)+1
@@ -218,6 +230,10 @@ function showResult(){
         game.joueur.score=0
         game.ordinateur.score=0
         caseR.textContent="Start Game"
+
+        main.setAttribute("src","")
+        ordinateur.setAttribute("src","")
+
         manageRounds()
         displayScore()
         result.classList.add("hidden")
@@ -225,4 +241,3 @@ function showResult(){
     })
 
 }
-
