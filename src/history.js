@@ -6,8 +6,8 @@ let player=getChoosePlayer()
 afficherPlayerSelect(player)
 
 let history=getHistory()
+let historyList=document.querySelector("#historyList")
 function afficherHistory(histoory){
-    let historyList=document.querySelector("#historyList")
 
     let newTr=document.createElement("tr")
 
@@ -54,3 +54,31 @@ function AfficherResult(result){
         case "défaite": return "bg-red-500/20 text-red-300"
     }
 }
+
+
+function searchByPseudo(p){
+    historyList.innerHTML=""
+    let error=document.querySelector("#error")
+    error.innerHTML=""
+    history.forEach((ps)=>{
+        if(ps.joueur.pseudo.toLowerCase().includes(p.toLowerCase())){
+            afficherHistory(ps)
+        }
+    })
+
+    if( historyList.innerHTML===""){
+        
+        error.innerHTML="<h1 class='text-center font-bold rounded-card border-2 border-ink w-full p-2 mx-auto'>Aucun pseudo trouvé !</h1>";
+    }
+}
+
+let searchPlayer=document.querySelector("#searchPlayer")
+
+searchPlayer.addEventListener("input",()=>{
+    if(searchPlayer.value!==""){
+        searchByPseudo(searchPlayer.value)
+    }else{
+        historyList.innerHTML=""
+        afficherAll()
+    }
+})
