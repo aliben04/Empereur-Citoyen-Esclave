@@ -1,4 +1,4 @@
-import { getChoosePlayer, getHistory, getPleyers } from "./storage.js";
+import { getChoosePlayer, getHistory, setHistory } from "./storage.js";
 import { afficherPlayerSelect } from "./players.js";
 
 
@@ -31,12 +31,15 @@ function afficherHistory(histoory){
                     </td>
 
                     <td class="p-3 text-center">
-                        <button class="text-blue-300 hover:text-red-400 transition">
+                        <button id="delete" class="text-blue-300 hover:text-red-400 transition">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>
     </tr>
     `
+    newTr.querySelector("#delete").addEventListener("click",()=>{
+        showConfirmation(histoory.id)
+    })
     historyList.append(newTr)
 }
 
@@ -84,4 +87,38 @@ searchPlayer.addEventListener("input",()=>{
 })
 filterResult.addEventListener("change",()=>{
     filterHistory()
+})
+
+function deletHistory(idHistory){
+    history.forEach((h)=>{
+        if(h.id===idHistory){
+            history.splice(history.indexOf(h),1)
+            setHistory(history)
+        }
+    })
+    filterHistory()
+    
+}
+
+let deletePopup=document.querySelector("#deletePopup")
+let successPopup=document.querySelector("#successPopup")
+
+function showConfirmation(id){
+    deletePopup.classList.remove("hidden")
+    let yes=deletePopup.querySelector("#confirmDelete")
+    let no=deletePopup.querySelector("#cancelDelete")
+
+    yes.addEventListener("click",()=>{
+        deletHistory(id)
+         deletePopup.classList.add("hidden")
+         successPopup.classList.remove("hidden")
+    })
+    no.addEventListener("click",()=>{
+        deletePopup.classList.add("hidden")
+    })
+
+}
+
+successPopup.addEventListener("click",()=>{
+    successPopup.classList.add("hidden")
 })
