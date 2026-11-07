@@ -55,30 +55,33 @@ function AfficherResult(result){
     }
 }
 
+let searchPlayer=document.querySelector("#searchPlayer")
+let filterResult=document.querySelector("#filterResult")
 
-function searchByPseudo(p){
+function filterHistory(){
     historyList.innerHTML=""
+    let pseudo=searchPlayer.value.toLowerCase()
+    let filterRes=filterResult.value
     let error=document.querySelector("#error")
     error.innerHTML=""
-    history.forEach((ps)=>{
-        if(ps.joueur.pseudo.toLowerCase().includes(p.toLowerCase())){
-            afficherHistory(ps)
-        }
-    })
 
-    if( historyList.innerHTML===""){
-        
-        error.innerHTML="<h1 class='text-center font-bold rounded-card border-2 border-ink w-full p-2 mx-auto'>Aucun pseudo trouvé !</h1>";
+
+    let filter=history.filter((h)=>
+        h.joueur.pseudo.toLowerCase().includes(pseudo) && (filterRes==="all" || h.result===filterRes)
+    )
+    filter.forEach(h => {
+        afficherHistory(h)
+    });
+    if(historyList.innerHTML===""){
+        error.innerHTML = "Aucun résultat trouvé !";
     }
+
 }
 
-let searchPlayer=document.querySelector("#searchPlayer")
 
 searchPlayer.addEventListener("input",()=>{
-    if(searchPlayer.value!==""){
-        searchByPseudo(searchPlayer.value)
-    }else{
-        historyList.innerHTML=""
-        afficherAll()
-    }
+    filterHistory()
+})
+filterResult.addEventListener("change",()=>{
+    filterHistory()
 })
