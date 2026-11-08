@@ -63,21 +63,21 @@
                 <li>
                     <a href="index.html"
                     class="font-medium  transition-colors">
-                        Accueil
+                        Home
                     </a>
                 </li>
 
                 <li>
                     <a href="players.html"
                     class="font-medium  transition-colors">
-                        Profils
+                        Profiles
                     </a>
                 </li>
 
                 <li>
                     <a href="history.html"
                     class="font-medium  transition-colors">
-                        Historique
+                        History
                     </a>
                 </li>
             </ul>
@@ -95,68 +95,66 @@
     </header>
     <hr class="w-[90%] mx-auto border-gray-200">
     
-<section class="border rounded-xl p-4 w-[95%] m-2 mx-auto">
+    <section class=" p-4 w-[95%] m-2 mx-auto">
 
-    <h2 class="text-lg font-bold text-blue-200 mb-4">
-        Historique des parties
-    </h2>
+        <h2 class="text-lg font-bold text-blue-200 mb-4">
+            Game History
+        </h2>
 
-    <!-- Filters -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
+        <!-- Filters -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
 
-        <input
-            type="text"
-            id="searchPlayer"
-            placeholder="⌕ Rechercher par pseudo..."
-            class="bg-[#0b223d] border border-[#193b5c] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-blue-400"
-        >
+            <input
+                type="text"
+                id="searchPlayer"
+                placeholder="⌕ Search by username..."
+                class="bg-[#0b223d] border border-[#193b5c] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-blue-400"
+            >
 
-        <select
-            id="filterResult"
-            class="bg-[#0b223d] border border-[#193b5c] rounded-lg px-3 py-2 text-sm text-white outline-none"
-        >
-            <option value="all">Tous les résultats</option>
-            <option value="victoire">Victoire</option>
-            <option value="égalité">Égalité</option>
-            <option value="défaite">Défaite</option>
-        </select>
+            <select
+                id="filterResult"
+                class="bg-[#0b223d] border border-[#193b5c] rounded-lg px-3 py-2 text-sm text-white outline-none"
+            >
+                <option value="all">All Results</option>
+                <option value="win">win</option>
+                <option value="draw">draw</option>
+                <option value="lose">lose</option>
+            </select>
 
-        <select
-            id="filterDate"
-            class="bg-[#0b223d] border border-[#193b5c] rounded-lg px-3 py-2 text-sm text-white outline-none"
-        >
-            <option value="all">Tout le temps</option>
-            <option value="today">Aujourd'hui</option>
-            <option value="week">Cette semaine</option>
-            <option value="month">Ce mois</option>
-        </select>
+            <select
+                id="filterDate"
+                class="bg-[#0b223d] border border-[#193b5c] rounded-lg px-3 py-2 text-sm text-white outline-none"
+            >
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+            </select>
 
-    </div>
+        </div>
 
-    <!-- History Table -->
-    <div class=" rounded-lg border border-[#193b5c]">
+        <!-- History Table -->
+        <div class="rounded-lg border border-[#193b5c]">
 
-        <table class="w-full text-left text-sm mx-auto text-blue-100">
+            <table class="w-full text-left text-sm mx-auto text-blue-100">
 
-            <thead class="bg-[#0b2038] text-blue-300">
-                <tr>
-                    <th class="p-3 font-medium">Date</th>
-                    <th class="p-3 font-medium">Joueur</th>
-                    <th class="p-3 font-medium text-center">Score (J/C)</th>
-                    <th class="p-3 font-medium text-center">Résultat</th>
-                    <th class="p-3"></th>
-                </tr>
-            </thead>
+                <thead class="bg-[#0b2038] text-blue-300">
+                    <tr>
+                        <th class="p-3 font-medium">Date</th>
+                        <th class="p-3 font-medium">Player</th>
+                        <th class="p-3 font-medium text-center">Score (P/C)</th>
+                        <th class="p-3 font-medium text-center">Result</th>
+                        <th class="p-3"></th>
+                    </tr>
+                </thead>
 
-            <tbody id="historyList" class="divide-y divide-[#193b5c]">
+                <tbody id="historyList" class="divide-y divide-[#193b5c]">
 
-                
+                </tbody>
+            </table>
 
-            </tbody>
-        </table>
-
-    </div>
-</section>
+        </div>
+    </section>
 <h1 id="error"></h1>
     
     <div id="deletePopup" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">

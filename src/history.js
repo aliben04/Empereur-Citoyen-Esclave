@@ -26,7 +26,7 @@ function afficherHistory(histoory){
 
                     <td class="p-3 text-center">
                         <span class="${AfficherResult(histoory.result)} px-3 py-1 rounded-full text-xs">
-                            ${histoory.result}
+                            ${histoory.result} 
                         </span>
                     </td>
 
@@ -52,9 +52,9 @@ afficherAll()
 
 function AfficherResult(result){
     switch(result){
-        case "victoire": return "bg-emerald-500/20 text-emerald-300"  
-        case "égalité": return "bg-blue-500/20 text-blue-300"
-        case "défaite": return "bg-red-500/20 text-red-300"
+        case "win": return "bg-emerald-500/20 text-emerald-300"  
+        case "draw": return "bg-blue-500/20 text-blue-300"
+        case "lose": return "bg-red-500/20 text-red-300"
     }
 }
 

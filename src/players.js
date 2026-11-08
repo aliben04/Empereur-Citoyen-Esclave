@@ -96,10 +96,10 @@ export function afficherPlayer(player){
             <article class="flex flex-col items-center border border-white rounded-2xl gap-2 p-2 hover:shadow-[0_0_15px_yellow] focus:bg-gray-400">
                     <p class="p-2 text-[50px] border-2 border-white rounded-[500px]">${player.avatar}</p>
                     <h2>${player.pseudo}</h2>
-                    <p>${player.nbrPartie} Parties</p>
+                    <p>${player.nbrPartie} Parts</p>
                     <div>
-                        <button id="update" class="btn-primary bg-blue-500">Modifier</button>
-                        <button id="supprimer" class="btn-primary bg-red-500 hover:bg-amber-400">Supprimer</button>
+                        <button id="update" class="btn-primary bg-blue-500">Update</button>
+                        <button id="supprimer" class="btn-primary bg-red-500 hover:bg-amber-400">Delete</button>
                     </div>
             </article>
     
@@ -207,7 +207,7 @@ export function afficherPlayerSelect(player){
                     <p class="p-2 text-[20px] md:text-[30px] border-2 border-white rounded-[500px] cursor-pointer ">${player.avatar}</p>
                     <div>
                         <h3 class="font-bold">${player.pseudo}</h3>
-                        <p class="text-mist-500">(Joueur actif)</p>
+                        <p class="text-mist-500">(Active player)</p>
                     </div>
         `
 

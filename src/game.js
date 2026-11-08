@@ -1,5 +1,5 @@
 import { afficherPlayerSelect } from "./players.js";
-import { getChoosePlayer, getHistory, setChoosePlayer, setHistory } from "./storage.js";
+import { getChoosePlayer, getHistory, getPleyers, setChoosePlayer, setHistory, setPlayers } from "./storage.js";
 
 let game = {
     joueur: {
@@ -39,6 +39,9 @@ let mainCarts=document.querySelector("#mainCarts")
 
 let main=document.querySelector("#main")
 let ordinateur=document.querySelector("#ordinateur")
+
+
+let isPlaying = false;
 function addCart(handMain,handOrd){
 
     for(let i=0;i<handMain.length;i++){
@@ -52,6 +55,11 @@ function addCart(handMain,handOrd){
         imgor.classList="h-20 md:h-30 lg:35 rounded-2xl"
         
         img.addEventListener("click",()=>{
+                if (isPlaying) {
+                    return;
+                }
+
+                isPlaying = true;
                 main.classList.add("flip")
                 ordinateur.classList.add("flip");
 
@@ -72,6 +80,7 @@ function addCart(handMain,handOrd){
                     caseEgalite(i,indexord,res.result)
                     AfficherResult(res.result)
                     displayScore()
+                    isPlaying = false;
                 },600)
                 
             })
@@ -87,25 +96,25 @@ function addCart(handMain,handOrd){
 function duel(cj,co){
 
     if(cj.includes("empereur")  &&  co.includes("citoyen")){
-        return {result:"victoire",scorj:1,scorO:0}
+        return {result:"win",scorj:1,scorO:0}
     }
     else if(cj.includes("citoyen") && co.includes("empereur")){
-        return  {result:"défaite",scorj:0,scorO:1}
+        return  {result:"lose",scorj:0,scorO:1}
     }
     else if(cj.includes("empereur") && co.includes("esclave")){
-        return {result:"défaite",scorj:0,scorO:5}
+        return {result:"lose",scorj:0,scorO:5}
     }
     else if(cj.includes("esclave") && co.includes("empereur")){
-        return  {result:"victoire",scorj:5,scorO:0}
+        return  {result:"win",scorj:5,scorO:0}
     }
     else if(cj.includes("esclave") && co.includes("citoyen")){
-        return {result:"défaite",scorj:0,scorO:1}
+        return {result:"lose",scorj:0,scorO:1}
     }
     else if(cj.includes("citoyen") && co.includes("esclave")){
-        return {result:"victoire",scorj:1,scorO:0}
+        return {result:"win",scorj:1,scorO:0}
     }
     else{
-        return  {result:"égalité",scorj:0,scorO:0}
+        return  {result:"draw",scorj:0,scorO:0}
     }
 }
 
@@ -116,7 +125,7 @@ let copieOrdinateur = [...mainOrdinateur];
 
 function caseEgalite(indexJ,indexO,caseEg){
 
-    if(caseEg==="égalité"){
+    if(caseEg==="draw"){
         meCarts.innerHTML=""
         mainCarts.innerHTML=""
 
@@ -145,8 +154,9 @@ function caseEgalite(indexJ,indexO,caseEg){
             date: new Date().toString().slice(0,21),
             playerScore: game.joueur.score,
             computerScore: game.ordinateur.score,
-            result: game.duel.resultat     // "victoire", "défaite" ou "égalité"
+            result: game.duel.resultat     // "win", "lose" ou "draw"
         }
+        addNbrParts(plyer)
          history.push(histor_y)
          setHistory(history)
        
@@ -162,9 +172,9 @@ addCart(copieJoueur,copieOrdinateur)
 function AfficherResult(result){
     let caseR=document.querySelector(".result")
     switch(result){
-        case "victoire": caseR.textContent="🏆 victoire"; break
-        case "égalité": caseR.textContent="😒 égalité"; break
-        case "défaite": caseR.textContent=" 😔 défaite";break
+        case "win": caseR.textContent="🏆 win"; break
+        case "draw": caseR.textContent="😒 draw"; break
+        case "lose": caseR.textContent=" 😔 lose";break
     }
 }
 
@@ -172,10 +182,13 @@ function AfficherResult(result){
 function displayScore(){
     let monS=document.querySelector("#monS")
     let scoreO=document.querySelector("#scoreO")
+    
 
     monS.textContent=game.joueur.score
     scoreO.textContent=game.ordinateur.score
 }
+let avatar_=document.querySelector("#avatar_")
+avatar_.textContent=plyer.avatar
 
 function manageRounds(){
     let rounds=document.querySelector("#rounds")
@@ -210,14 +223,14 @@ function showResult(){
     result.classList.remove("hidden")
 
     if(scorePl>scoreOr){
-        casePlayer.textContent="🏆 victoire"
-        game.duel.resultat="victoire"
+        casePlayer.textContent="🏆 win"
+        game.duel.resultat="win"
     }else if((scorePl<scoreOr)){
-        casePlayer.textContent="😔 défaite"
-        game.duel.resultat="défaite"
+        casePlayer.textContent="😔 lose"
+        game.duel.resultat="lose"
     }else{
-        casePlayer.textContent="😒 égalité"
-        game.duel.resultat="égalité"
+        casePlayer.textContent="😒 draw"
+        game.duel.resultat="draw"
     }
 
     finalPlayerScore.textContent=game.joueur.score
@@ -240,4 +253,15 @@ function showResult(){
         
     })
 
+}
+
+
+function addNbrParts(player){
+    let users=getPleyers()
+    users.forEach(element => {
+        if(element.pseudo===player.pseudo){
+            element.nbrPartie++
+        }
+    });
+    setPlayers(users)
 }

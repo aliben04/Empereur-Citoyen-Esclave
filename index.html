@@ -32,6 +32,9 @@
         nav li:hover::after{
             width: 100%;
         }
+        body{
+            background-image: url(image/Gemini_Generated_Image_m9uil8m9uil8m9ui.jpg);
+        }
 
     </style>
 </head>
@@ -49,6 +52,9 @@
             <span class="text-amber-400">E</span>sclave
         </h1>
     </div>
+    <article id="player" class="w-75 p-2 m-2 flex items-center gap-4 font-bold ">
+                
+    </article>
 
     <!-- Navigation -->
     <nav class="flex items-center gap-4 md:gap-6 rounded-full bg-amber-100 text-black px-5 py-3 ">
@@ -57,21 +63,21 @@
             <li>
                 <a href="#"
                    class="font-medium  transition-colors">
-                    Accueil
+                    Home
                 </a>
             </li>
 
             <li>
                 <a href="players.html"
                    class="font-medium  transition-colors">
-                    Profils
+                    Profiles
                 </a>
             </li>
 
             <li>
-                <a href="#"
+                <a href="history.html"
                    class="font-medium  transition-colors">
-                    Historique
+                    History
                 </a>
             </li>
         </ul>
@@ -91,11 +97,11 @@
 
     <section class="grid grid-cols-1 md:grid-cols-2 text-amber-50 md:w-[90%] md:mx-auto md:h-150 items-center ">
         <article class="p-3  flex flex-col gap-8 items-center md:items-start">
-            <h1 class="font-bold text-[35px] ">Le jeu de duel des <br> 3 cartes</h1>
-            <p class="text-gray-200" >Affronte l'ordinateur, gagne des points et grimpe dans le classement</p>
+            <h1 class="font-bold text-[35px] ">The 3-card Duel Game</h1>
+            <p class="text-gray-200" >Face the computer, earn points, and climb the leaderboard</p>
             <div class="flex gap-3">
-                <button class="btn-primary bg-amber-200 text-black hover:bg-amber-500"><a href="#"><i class="fa-solid fa-play"></i> Commencer</a></button>
-                <button class="btn-primary text-black bg-blue-100"><a href="#">Voir les regles</a></button>
+                <button id="btnStart" class="btn-primary bg-amber-200 text-black hover:bg-amber-500"><a href="game.html"><i class="fa-solid fa-play"></i> To start</a></button>
+                <button id="btnRules" class="btn-primary text-black bg-blue-100">See the rules</button>
         </article>
         <article class="relative flex  items-center justify-center h-80 w-100 md:w-130 mx-auto">
 
@@ -134,6 +140,67 @@
 
         </article>
     </section>
+    <div id="confirmationPlayer" class=" hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+         <div id="div" class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl text-center">
+             <div class="text-4xl mb-4">⚠️</div>
+             <h2 class="text-xl font-bold text-gray-800 mb-2">
+                Sélectionnez d'abord un joueur !
+            </h2>
+            <p class="text-gray-500 mb-6">
+                 Vous devez accéder à la page **Profils** pour sélectionner un joueur avant de commencer la partie.
+            </p>
+         </div>
+    </div>
+
+
+    <!-- Rules Popup -->
+    <div id="rulesPopup"
+        class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+
+        <div class="bg-[#0b2038] border-2 border-[#c5a45e] rounded-xl
+                    p-6 w-full max-w-lg text-white shadow-2xl">
+
+            <h2 class="text-2xl font-bold text-yellow-400 text-center mb-5">
+                📜 Game Rules
+            </h2>
+
+            <div class="space-y-4 text-gray-200">
+
+                <div>
+                    <h3 class="font-bold text-yellow-300">⚔️ 1. Card Power</h3>
+                    <p>Empereur beats Citoyen.</p>
+                    <p>Citoyen beats Esclave.</p>
+                    <p>Esclave beats Empereur.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-yellow-300">🏆 2. Scoring</h3>
+                    <p>The winner gets 1 point or 5 points depending on the round.</p>
+                    <p>In case of a tie, both cards are removed.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-yellow-300">👑 3. Game Progress</h3>
+                    <p>The game contains 12 rounds.</p>
+                    <p>The camp changes after rounds 3, 6 and 9.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-yellow-300">🎯 4. Final Result</h3>
+                    <p>After 12 rounds, the player with the highest score wins!</p>
+                </div>
+
+            </div>
+
+            <button id="closeRules"
+                class="mt-6 w-full bg-yellow-600 hover:bg-yellow-500
+                    text-white font-bold py-2 rounded-lg">
+                Close
+            </button>
+
+        </div>
+    </div>
+
 
     <script type="module" src="src/main.js"></script>
 </body>
